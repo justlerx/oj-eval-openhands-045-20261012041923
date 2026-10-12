@@ -108,20 +108,20 @@ int main() {
     ElevatorSystem elevator;
     
     for (int i = 0; i < n; i++) {
-        string command;
+        char command[20];
         cin >> command;
         
-        if (command == "action") {
+        if (command[0] == 'a' && command[1] == 'c' && command[2] == 't' && command[3] == 'i' && command[4] == 'o' && command[5] == 'n') {
             elevator.action();
-        } else if (command == "add") {
+        } else if (command[0] == 'a' && command[1] == 'd' && command[2] == 'd') {
             int floor;
             cin >> floor;
             elevator.addRequest(floor);
-        } else if (command == "cancel") {
+        } else if (command[0] == 'c' && command[1] == 'a' && command[2] == 'n' && command[3] == 'c' && command[4] == 'e' && command[5] == 'l') {
             int floor;
             cin >> floor;
             elevator.cancelRequest(floor);
-        } else if (command == "locate") {
+        } else if (command[0] == 'l' && command[1] == 'o' && command[2] == 'c' && command[3] == 'a' && command[4] == 't' && command[5] == 'e') {
             cout << elevator.locate() << "\n";
         }
     }
