@@ -1,9 +1,10 @@
 #include <cstdio>
+#include <iostream>
 
 const int MAX_SIZE = 500005;
 
 int currentFloor = 0;
-int directionUp = 1;  // 1 for up, 0 for down
+int directionUp = 1;
 int requests[MAX_SIZE];
 int requestCount = 0;
 
@@ -14,7 +15,6 @@ void addRequest(int floor) {
 void cancelRequest(int floor) {
     for (int i = 0; i < requestCount; i++) {
         if (requests[i] == floor) {
-            // Remove by shifting
             for (int j = i; j < requestCount - 1; j++) {
                 requests[j] = requests[j + 1];
             }
@@ -26,13 +26,12 @@ void cancelRequest(int floor) {
 
 void action() {
     if (requestCount == 0) {
-        return;  // No requests, stay still
+        return;
     }
     
     int targetFloor = -1;
     
     if (directionUp) {
-        // Find the smallest floor >= currentFloor
         for (int i = 0; i < requestCount; i++) {
             if (requests[i] >= currentFloor) {
                 if (targetFloor == -1 || requests[i] < targetFloor) {
@@ -41,7 +40,6 @@ void action() {
             }
         }
     } else {
-        // Find the largest floor <= currentFloor
         for (int i = 0; i < requestCount; i++) {
             if (requests[i] <= currentFloor) {
                 if (targetFloor == -1 || requests[i] > targetFloor) {
@@ -52,11 +50,9 @@ void action() {
     }
     
     if (targetFloor == -1) {
-        // No request in current direction, reverse direction
         directionUp = 1 - directionUp;
         
         if (directionUp) {
-            // Find the smallest floor >= currentFloor
             for (int i = 0; i < requestCount; i++) {
                 if (requests[i] >= currentFloor) {
                     if (targetFloor == -1 || requests[i] < targetFloor) {
@@ -65,7 +61,6 @@ void action() {
                 }
             }
         } else {
-            // Find the largest floor <= currentFloor
             for (int i = 0; i < requestCount; i++) {
                 if (requests[i] <= currentFloor) {
                     if (targetFloor == -1 || requests[i] > targetFloor) {
@@ -78,7 +73,6 @@ void action() {
     
     if (targetFloor != -1) {
         currentFloor = targetFloor;
-        // Remove the completed request
         cancelRequest(targetFloor);
     }
 }
@@ -89,24 +83,24 @@ int locate() {
 
 int main() {
     int n;
-    scanf("%d", &n);
+    std::cin >> n;
     
     for (int i = 0; i < n; i++) {
         char command[20];
-        scanf("%s", command);
+        std::cin >> command;
         
         if (command[0] == 'a' && command[1] == 'c' && command[2] == 't' && command[3] == 'i' && command[4] == 'o' && command[5] == 'n') {
             action();
         } else if (command[0] == 'a' && command[1] == 'd' && command[2] == 'd') {
             int floor;
-            scanf("%d", &floor);
+            std::cin >> floor;
             addRequest(floor);
         } else if (command[0] == 'c' && command[1] == 'a' && command[2] == 'n' && command[3] == 'c' && command[4] == 'e' && command[5] == 'l') {
             int floor;
-            scanf("%d", &floor);
+            std::cin >> floor;
             cancelRequest(floor);
         } else if (command[0] == 'l' && command[1] == 'o' && command[2] == 'c' && command[3] == 'a' && command[4] == 't' && command[5] == 'e') {
-            printf("%d\n", locate());
+            std::cout << locate() << std::endl;
         }
     }
     
