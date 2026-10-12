@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <iostream>
 
-const int MAX_SIZE = 500005;
+#define MAX_SIZE 500005
 
 int currentFloor = 0;
 int directionUp = 1;
@@ -13,9 +13,11 @@ void addRequest(int floor) {
 }
 
 void cancelRequest(int floor) {
-    for (int i = 0; i < requestCount; i++) {
+    int i;
+    for (i = 0; i < requestCount; i++) {
         if (requests[i] == floor) {
-            for (int j = i; j < requestCount - 1; j++) {
+            int j;
+            for (j = i; j < requestCount - 1; j++) {
                 requests[j] = requests[j + 1];
             }
             requestCount--;
@@ -30,9 +32,10 @@ void action() {
     }
     
     int targetFloor = -1;
+    int i;
     
     if (directionUp) {
-        for (int i = 0; i < requestCount; i++) {
+        for (i = 0; i < requestCount; i++) {
             if (requests[i] >= currentFloor) {
                 if (targetFloor == -1 || requests[i] < targetFloor) {
                     targetFloor = requests[i];
@@ -40,7 +43,7 @@ void action() {
             }
         }
     } else {
-        for (int i = 0; i < requestCount; i++) {
+        for (i = 0; i < requestCount; i++) {
             if (requests[i] <= currentFloor) {
                 if (targetFloor == -1 || requests[i] > targetFloor) {
                     targetFloor = requests[i];
@@ -53,7 +56,7 @@ void action() {
         directionUp = 1 - directionUp;
         
         if (directionUp) {
-            for (int i = 0; i < requestCount; i++) {
+            for (i = 0; i < requestCount; i++) {
                 if (requests[i] >= currentFloor) {
                     if (targetFloor == -1 || requests[i] < targetFloor) {
                         targetFloor = requests[i];
@@ -61,7 +64,7 @@ void action() {
                 }
             }
         } else {
-            for (int i = 0; i < requestCount; i++) {
+            for (i = 0; i < requestCount; i++) {
                 if (requests[i] <= currentFloor) {
                     if (targetFloor == -1 || requests[i] > targetFloor) {
                         targetFloor = requests[i];
@@ -85,7 +88,8 @@ int main() {
     int n;
     std::cin >> n;
     
-    for (int i = 0; i < n; i++) {
+    int i;
+    for (i = 0; i < n; i++) {
         char command[20];
         std::cin >> command;
         
