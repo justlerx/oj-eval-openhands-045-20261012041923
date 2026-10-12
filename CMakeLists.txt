@@ -4,4 +4,4 @@ project(ElevatorSystem)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(code solution.cpp)
+add_executable(code code.cpp)
